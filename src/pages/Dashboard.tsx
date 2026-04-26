@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import { RefreshCw, Brain } from "lucide-react";
 import { AppLayout } from "@/components/AppLayout";
@@ -7,6 +7,7 @@ import { CityMap } from "@/components/CityMap";
 import { OfferCard } from "@/components/OfferCard";
 import { Button } from "@/components/ui/button";
 import { getOffers } from "@/lib/mockData";
+import { LiveTicker } from "@/components/LiveTicker";
 import { toast } from "sonner";
 
 const Dashboard = () => {
@@ -23,6 +24,7 @@ const Dashboard = () => {
 
   return (
     <AppLayout>
+      <LiveTicker />
       <div className="container py-8 space-y-8">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -75,9 +77,11 @@ const Dashboard = () => {
             <span className="text-xs font-mono text-muted-foreground">{visible.length} live offers</span>
           </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {visible.map((o, i) => (
-              <OfferCard key={o.id} offer={o} index={i} onDismiss={(x) => setDismissed((d) => [...d, x.id])} />
-            ))}
+            <AnimatePresence mode="popLayout">
+              {visible.map((o, i) => (
+                <OfferCard key={o.id} offer={o} index={i} onDismiss={(x) => setDismissed((d) => [...d, x.id])} />
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </div>
