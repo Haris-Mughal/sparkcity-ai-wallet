@@ -76,6 +76,25 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Stats strip */}
+      <section className="border-y border-border/40 bg-background/40 backdrop-blur">
+        <div className="container py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { v: 38, suffix: "", label: "Live merchants" },
+            { v: 24, suffix: "%", label: "Avg revenue uplift" },
+            { v: 68, suffix: "%", label: "Acceptance rate" },
+            { v: 11.5, decimals: 1, prefix: "$", label: "Avg cashback" },
+          ].map((s, i) => (
+            <div key={i}>
+              <div className="text-3xl md:text-4xl font-semibold text-gradient">
+                <AnimatedCounter to={s.v} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} decimals={s.decimals ?? 0} />
+              </div>
+              <div className="text-xs font-mono text-muted-foreground tracking-widest mt-1">{s.label.toUpperCase()}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="container py-20">
         <div className="text-center max-w-2xl mx-auto mb-12">
