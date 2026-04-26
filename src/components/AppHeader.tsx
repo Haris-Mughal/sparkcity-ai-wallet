@@ -58,6 +58,7 @@ export const AppHeader = ({ variant = "user" }: { variant?: "user" | "merchant" 
                 <Button asChild variant="hero" size="sm">
                   <a href="/dashboard">Get Started</a>
                 </Button>
+
               </>
             )}
             {variant !== "landing" && (
