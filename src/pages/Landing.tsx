@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MapPin, Cloud, Zap, Shield, BarChart3, Brain } fr
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AppLayout } from "@/components/AppLayout";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroImg from "@/assets/hero-city.jpg";
 
 const Landing = () => {
@@ -30,7 +31,7 @@ const Landing = () => {
             className="text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tight max-w-4xl"
           >
             Your City Now <br />
-            <span className="text-gradient">Works For You</span>
+            <span className="text-gradient bg-clip-text bg-gradient-aurora-pan animate-gradient-pan" style={{ WebkitBackgroundClip: "text", backgroundSize: "300% 300%" }}>Works For You</span>
           </motion.h1>
 
           <motion.p
@@ -72,6 +73,25 @@ const Landing = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Stats strip */}
+      <section className="border-y border-border/40 bg-background/40 backdrop-blur">
+        <div className="container py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { v: 38, suffix: "", label: "Live merchants" },
+            { v: 24, suffix: "%", label: "Avg revenue uplift" },
+            { v: 68, suffix: "%", label: "Acceptance rate" },
+            { v: 11.5, decimals: 1, prefix: "$", label: "Avg cashback" },
+          ].map((s, i) => (
+            <div key={i}>
+              <div className="text-3xl md:text-4xl font-semibold text-gradient">
+                <AnimatedCounter to={s.v} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} decimals={s.decimals ?? 0} />
+              </div>
+              <div className="text-xs font-mono text-muted-foreground tracking-widest mt-1">{s.label.toUpperCase()}</div>
+            </div>
+          ))}
         </div>
       </section>
 

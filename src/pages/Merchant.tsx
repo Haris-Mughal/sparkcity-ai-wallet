@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { AppLayout } from "@/components/AppLayout";
 import { trafficSeries } from "@/lib/mockData";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { TrendingUp, Users, Target, DollarSign } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const stats = [
-  { icon: Users, label: "Customer visits", value: "342", delta: "+18%", color: "text-neon-cyan" },
-  { icon: Target, label: "Acceptance rate", value: "68%", delta: "+6pt", color: "text-neon-violet" },
-  { icon: DollarSign, label: "Revenue uplift", value: "$1,840", delta: "+24%", color: "text-neon-lime" },
-  { icon: TrendingUp, label: "Live offers", value: "7", delta: "active", color: "text-neon-magenta" },
+  { icon: Users, label: "Customer visits", value: 342, prefix: "", suffix: "", delta: "+18%", color: "text-neon-cyan" },
+  { icon: Target, label: "Acceptance rate", value: 68, suffix: "%", delta: "+6pt", color: "text-neon-violet" },
+  { icon: DollarSign, label: "Revenue uplift", value: 1840, prefix: "$", delta: "+24%", color: "text-neon-lime" },
+  { icon: TrendingUp, label: "Live offers", value: 7, delta: "active", color: "text-neon-magenta" },
 ];
 
 const Merchant = () => {
@@ -25,13 +26,16 @@ const Merchant = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="glass rounded-2xl p-5">
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="glass rounded-2xl p-5 relative overflow-hidden">
+              <div className="absolute -top-8 -right-8 h-24 w-24 rounded-full bg-gradient-primary opacity-10 blur-2xl" />
               <s.icon className={`h-6 w-6 ${s.color} mb-2`} />
               <div className="text-xs font-mono text-muted-foreground">{s.label}</div>
               <div className="flex items-baseline gap-2 mt-1">
-                <div className="text-2xl font-semibold">{s.value}</div>
+                <div className="text-2xl font-semibold">
+                  <AnimatedCounter to={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
+                </div>
                 <div className="text-xs font-mono text-neon-lime">{s.delta}</div>
               </div>
             </motion.div>
