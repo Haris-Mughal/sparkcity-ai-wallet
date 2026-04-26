@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MapPin, Cloud, Zap, Shield, BarChart3, Brain } fr
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AppLayout } from "@/components/AppLayout";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroImg from "@/assets/hero-city.jpg";
 
 const Landing = () => {
@@ -30,7 +31,7 @@ const Landing = () => {
             className="text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tight max-w-4xl"
           >
             Your City Now <br />
-            <span className="text-gradient">Works For You</span>
+            <span className="text-gradient bg-clip-text bg-gradient-aurora-pan animate-gradient-pan" style={{ WebkitBackgroundClip: "text", backgroundSize: "300% 300%" }}>Works For You</span>
           </motion.h1>
 
           <motion.p
